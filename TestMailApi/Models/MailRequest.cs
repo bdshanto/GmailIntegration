@@ -1,3 +1,5 @@
+namespace TestMailApi.Models;
+
 public class MailRequest
 {
     public string ToEmail { get; set; }

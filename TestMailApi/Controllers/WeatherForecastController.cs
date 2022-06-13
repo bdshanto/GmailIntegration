@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using TestMailApi.IServices;
+using TestMailApi.Models;
+using TestMailApi.Services;
 
 namespace TestMailApi.Controllers
 {

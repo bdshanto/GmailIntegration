@@ -1,16 +1,10 @@
-
-
-
 using System.Net;
 using System.Net.Mail;
-using MailKit.Security;
 using Microsoft.Extensions.Options;
-using MimeKit;
+using TestMailApi.IServices;
+using TestMailApi.Models;
 
-public interface IMailService
-{
-    Task SendEmailAsync(MailRequest mailRequest);
-}
+namespace TestMailApi.Services;
 
 public class MailService : IMailService
 {
