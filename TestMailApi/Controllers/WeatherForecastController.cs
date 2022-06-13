@@ -4,41 +4,29 @@ namespace TestMailApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class MailController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+
+        private readonly ILogger<MailController> _logger;
         private readonly IMailService _iMailService;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IMailService mailService)
+        public MailController(ILogger<MailController> logger, IMailService mailService)
         {
             _logger = logger;
             this._iMailService = mailService;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpGet]
+        public async Task<IActionResult> SendMail()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            var request = new MailRequest
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
-        }
+                Body = "I'm Working",
+                Subject = "I'm Testing Subject",
+                ToEmail = "hsibbd@gmail.com"
+            };
 
-        [HttpPost("send")]
-        public async Task<IActionResult> SendMail( )
-        {
-            var request = new MailRequest();
-            request.Body = "I'm Working";
-            request.Subject = "I'm Testing Subject";
-            request.ToEmail = "hsibbd@gmail.com";
 
             try
             {
