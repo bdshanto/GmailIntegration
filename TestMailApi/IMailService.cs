@@ -29,7 +29,7 @@ public class MailService : IMailService
 
             MailMessage mail = new MailMessage()
             {
-                From = new MailAddress(_mailSettings.Mail, "Muhammad Hassan Tariq")
+                From = new MailAddress(_mailSettings.Mail, "CDAS MAIL CHECKING")
             };
             mail.To.Add(new MailAddress(toEmail));
 
