@@ -1,9 +1,11 @@
 
 
 
+using System.Net;
 using System.Net.Mail;
-using System.Net.Mime;
+using MailKit.Security;
 using Microsoft.Extensions.Options;
+using MimeKit;
 
 public interface IMailService
 {
@@ -20,33 +22,34 @@ public class MailService : IMailService
 
     public async Task SendEmailAsync(MailRequest mailRequest)
     {
-        var email = new MimeMessage();
-        email.Sender = MailboxAddress.Parse(_mailSettings.Mail);
-        email.To.Add(MailboxAddress.Parse(mailRequest.ToEmail));
-        email.Subject = mailRequest.Subject;
-        var builder = new BodyBuilder();
-        if (mailRequest.Attachments != null)
+        try
         {
-            byte[] fileBytes;
-            foreach (var file in mailRequest.Attachments)
+            string toEmail = mailRequest.ToEmail;
+
+
+            MailMessage mail = new MailMessage()
             {
-                if (file.Length > 0)
-                {
-                    using (var ms = new MemoryStream())
-                    {
-                        file.CopyTo(ms);
-                        fileBytes = ms.ToArray();
-                    }
-                    builder.Attachments.Add(file.FileName, fileBytes, ContentType.Parse(file.ContentType));
-                }
+                From = new MailAddress(_mailSettings.Mail, "Muhammad Hassan Tariq")
+            };
+            mail.To.Add(new MailAddress(toEmail));
+
+            mail.Subject = "Personal Management System - ";
+            mail.Body = @"THIS IS CONSTANT TEST Message";
+            mail.IsBodyHtml = true;
+            mail.Priority = MailPriority.High;
+
+            using (SmtpClient smtp = new SmtpClient(_mailSettings.Host, _mailSettings.Port))
+            {
+                smtp.Credentials = new NetworkCredential(_mailSettings.Mail, _mailSettings.Password);
+                smtp.EnableSsl = true;
+                await smtp.SendMailAsync(mail);
             }
         }
-        builder.HtmlBody = mailRequest.Body;
-        email.Body = builder.ToMessageBody();
-        using var smtp = new SmtpClient();
-        smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
-        smtp.Authenticate(_mailSettings.Mail, _mailSettings.Password);
-        await smtp.SendAsync(email);
-        smtp.Disconnect(true);
+        catch (Exception ex)
+        {
+            //do something here
+        }
+
+
     }
 }
