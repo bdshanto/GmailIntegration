@@ -12,10 +12,12 @@ namespace TestMailApi.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IMailService _iMailService;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IMailService mailService)
         {
             _logger = logger;
+            this._iMailService = mailService;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
@@ -28,6 +30,26 @@ namespace TestMailApi.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [HttpPost("send")]
+        public async Task<IActionResult> SendMail( )
+        {
+            var request = new MailRequest();
+            request.Body = "I'm Working";
+            request.Subject = "I'm Testing Subject";
+            request.ToEmail = "hsibbd@gmail.com";
+
+            try
+            {
+                await _iMailService.SendEmailAsync(request);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
     }
 }
