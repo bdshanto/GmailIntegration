@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailTest", "MailTest\MailTest.csproj", "{606B7798-65A0-45AE-8AD7-1F65595AE379}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMailApi", "TestMailApi\TestMailApi.csproj", "{4E0B80C8-AD2D-4501-A2D8-65D5A960E011}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestMailApi", "TestMailApi\TestMailApi.csproj", "{4E0B80C8-AD2D-4501-A2D8-65D5A960E011}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{606B7798-65A0-45AE-8AD7-1F65595AE379}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{606B7798-65A0-45AE-8AD7-1F65595AE379}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{606B7798-65A0-45AE-8AD7-1F65595AE379}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{606B7798-65A0-45AE-8AD7-1F65595AE379}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4E0B80C8-AD2D-4501-A2D8-65D5A960E011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4E0B80C8-AD2D-4501-A2D8-65D5A960E011}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E0B80C8-AD2D-4501-A2D8-65D5A960E011}.Release|Any CPU.ActiveCfg = Release|Any CPU
